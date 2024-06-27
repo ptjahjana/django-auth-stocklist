@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Application apps
     'main',
     'accounts',
+    'restaurants',
 ]
 
 MIDDLEWARE = [
@@ -67,8 +68,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = join(CONTENT_DIR, 'tmp/emails')
-EMAIL_HOST_USER = 'test@example.com'
-DEFAULT_FROM_EMAIL = 'test@example.com'
+EMAIL_HOST_USER = 'purnatj@gmail.com'
+DEFAULT_FROM_EMAIL = 'purnatj@gmail.com'
 
 DATABASES = {
     'default': {
@@ -92,7 +93,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ENABLE_USER_ACTIVATION = True
+ENABLE_USER_ACTIVATION = False
 DISABLE_USERNAME = False
 LOGIN_VIA_EMAIL = True
 LOGIN_VIA_EMAIL_OR_USERNAME = False
