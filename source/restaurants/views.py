@@ -1,12 +1,23 @@
 from django.db.models import Avg, Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
+from django.contrib import messages
+from django.views.generic import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext_lazy as _
+from bootstrap_modal_forms.generic import BSModalCreateView
+
 
 from .models import Restaurant, Review
+
+from .forms import (
+    CreateRestaurantForm
+)
+    
 
 def list(request):
     print('Request for index page received')
@@ -22,32 +33,20 @@ def details(request, id):
     return render(request, 'restaurants/details.html', {'restaurant': restaurant})
 
 
-def create(request):
-    print('Request for add restaurant page received')
-    return render(request, 'restaurants/create.html')
+class create_restaurant(LoginRequiredMixin, FormView):
+    template_name = 'restaurants/create.html'
+    form_class = CreateRestaurantForm
 
-
-@csrf_exempt
-def add(request):
-    try:
-        name = request.POST['name']
-        street_address = request.POST['street_address']
-        description = request.POST['description']
-    except (KeyError):
-        # Redisplay the form
-        return render(request, 'restaurants/create.html', {
-            'error_message': "You must include a restaurant name, address, and description",
-        })
-        
-    else:
+    def form_valid(self, form):
         restaurant = Restaurant()
-        restaurant.name = name
-        restaurant.street_address = street_address
-        restaurant.description = description
+        restaurant.name = form.cleaned_data['name']
+        restaurant.street_address = form.cleaned_data['street_address']
+        restaurant.description = form.cleaned_data['description']
         Restaurant.save(restaurant)
 
-        return redirect('restaurants:details', args=(restaurant.id,))
+        messages.success(self.request, _('New restaurant has been successfully created.'))
 
+        return redirect('restaurants:list')
 
 @csrf_exempt
 def add_review(request):

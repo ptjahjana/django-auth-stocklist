@@ -9,3 +9,4 @@ env/
 tmp/
 
 db.sqlite3
+poetry.lock

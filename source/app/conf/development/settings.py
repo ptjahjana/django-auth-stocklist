@@ -1,5 +1,6 @@
 import warnings
 from os.path import dirname, abspath, join
+import os
 
 from django.utils.translation import gettext_lazy as _
 
@@ -71,10 +72,20 @@ EMAIL_FILE_PATH = join(CONTENT_DIR, 'tmp/emails')
 EMAIL_HOST_USER = 'purnatj@gmail.com'
 DEFAULT_FROM_EMAIL = 'purnatj@gmail.com'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DBNAME'),
+        'HOST': os.environ.get('DBHOST'),
+        'USER': os.environ.get('DBUSER'),
+        'PASSWORD': os.environ.get('DBPASS'),
     }
 }
 
