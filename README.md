@@ -37,8 +37,8 @@ If you need dynamic URLs with the language code, check out https://github.com/eg
 ### Clone the project
 
 ```bash
-git clone https://github.com/egorsmkv/simple-django-login-and-register
-cd simple-django-login-and-register
+git clone https://github.com/ptjahjana/django-auth-restaurants.git
+cd django-auth-restaurants.
 ```
 
 ### Install dependencies & activate virtualenv
