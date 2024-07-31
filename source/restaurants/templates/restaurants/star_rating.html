@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if review_count %}
     <span class="score">
         <div class="score-wrap align-top">
@@ -17,9 +19,9 @@
         </span>        
         </div>
         <span class="align-top">
-            {{ avg_rating|floatformat:1 }} ({{review_count}} {% if review_count == 1 %} review{% else %} reviews{% endif %})
+            {{ avg_rating|floatformat:1 }} ({{review_count}} {% if review_count == 1 %} {% trans 'review{' %}% else %} {% trans 'reviews' %}{% endif %})
         </span>
     </span> 
 {% else %}
-  <span class="fst-italic">No ratings yet</span>
+  <span class="fst-italic">{% trans 'No ratings yet' %}</span>
 {% endif %}

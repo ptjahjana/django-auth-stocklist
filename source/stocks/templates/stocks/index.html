@@ -1,0 +1,48 @@
+{% extends 'layouts/default/page.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Stocklist' %}{% endblock %} 
+
+{% block content %}
+<div class="container">
+  <form method="get">
+  {{ filter.form.as_p }}
+  <button type="submit" class="btn-primary">{% trans 'Search' %}</button>
+</form>
+<style> table tr:hover {background-color: #969696; color: white;} </style>
+    <div class="card-body">
+      <table class="table table-bordered text-center">
+        <tr style="background: #636363; color: aliceblue;">
+            <th>Fabric</th>
+            <th>Fab ID</th>
+            <th>WEIGHT</th>
+            <th>NET W</th>
+            <th>COLOR</th>
+            <th>LAB NO</th>
+            <th>LOT NO</th>
+            <th>Width</th>
+            <th>W Unit</th>
+        </tr>
+        {% for item in filter.qs %}
+        <tr>
+          <td>{{ item.fabric }}</td>
+          <td>{{ item.fabric_id }}</td>
+          <td>{{ item.weight }}</td>
+          <td>{{ item.net_weight }}</td>
+          <td>{{ item.color }}</td>
+          <td>{{ item.lab_no }}</td>
+          <td>{{ item.lot_no }}</td>
+          <td>{{ item.width }}</td>
+          <td>{{ item.weight_unit }}</td>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">{% trans 'No data' %}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </div> 
+
+{% endblock %}
