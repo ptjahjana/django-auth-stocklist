@@ -70,6 +70,8 @@ poetry shell
 
 ```bash
 python source/manage.py migrate
+python source/manage.py loaddata source/fixture.json
+
 ```
 
 ### Collect static files (only on a production server)

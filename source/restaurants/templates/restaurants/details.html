@@ -1,6 +1,7 @@
 {% extends 'layouts/default/page.html' %}
+{% load i18n %}
 {% load restaurant_extras %}
-{% block title %}Restaurant Details{% endblock %}
+{% block title %}{% trans 'Restaurant Details' %}{% endblock %}
 {% block head %}
   {{ block.super }}
   <style>
@@ -14,23 +15,23 @@
     <h1>{{ restaurant.name }}</h1>
 
     <div class="row">
-        <div class="col-md-2 fw-bold">Street address:</div>
+        <div class="col-md-2 fw-bold">{% trans 'Street address' %}:</div>
         <div class="col">{{ restaurant.street_address }}</div>
     </div>
     <div class="row">
-        <div class="col-md-2 fw-bold">Description:</div>
+        <div class="col-md-2 fw-bold">{% trans 'Description' %}:</div>
         <div class="col">{{ restaurant.description }}</div>                
     </div>
     <div class="row">
-        <div class="col-md-2 fw-bold">Rating:</div>
+        <div class="col-md-2 fw-bold">{% trans 'Rating' %}:</div>
         <div class="col"></div>                
     </div>
 
-    <h4 class="mt-5">Reviews</h4>
+    <h4 class="mt-5">{% trans 'Reviews' %}</h4>
 
     <p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addReviewModal">
-            Add new review
+          {% trans 'Add new review' %}
         </button>
     </p>
 
@@ -39,10 +40,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>User</th>
-                    <th>Rating</th>
-                    <th>Review</th>
+                    <th>{% trans 'Date' %}</th>
+                    <th>{% trans 'User' %}</th>
+                    <th>{% trans 'Rating' %}</th>
+                    <th>{% trans 'Review' %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +58,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>No reviews of this restaurant yet.</p>
+        <p>{% trans 'No reviews of this restaurant yet' %}.</p>
     {% endif %}
 
     <!-- Modal -->
@@ -65,7 +66,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addReviewModalLabel">Add Review</h5>
+            <h5 class="modal-title" id="addReviewModalLabel">{% trans 'Add Review' %}</h5>
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
               <form method="POST" action="{% url 'restaurants:add_review' %}">
@@ -75,7 +76,7 @@
                     <input type="hidden" id="user_name" name="user_name" value="{{ request.user.username }}">
                     <input type="hidden" id="id" name="id" value="{{ restaurant.id }}">
                   <div class="mb-3">
-                    <label class="form-label fw-bold">Rating</label>
+                    <label class="form-label fw-bold">{% trans 'Rating' %}</label>
 
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="rating" id="rating1" value="1">
@@ -99,13 +100,13 @@
                       </div>
                   </div>
                   <div class="mb-3">
-                      <label for="review_text" class="form-label fw-bold">Comments</label>
+                      <label for="review_text" class="form-label fw-bold">{% trans 'Comments' %}</label>
                       <input type="text" class="form-control" id="review_text" name="review_text">
                   </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+                <button type="submit" class="btn btn-primary">{% trans 'Save changes' %}</button>
               </div>
         </form>
         </div>
